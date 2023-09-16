@@ -22,16 +22,16 @@ const Login = () => {
   const { userInfo } = useSelector((state)=>state.auth);
   useEffect(()=>{
     if(userInfo){
-      navigate('/');
+     navigate('/');
     }
   }, [navigate, userInfo])
 
   const submitHandler = async (e) => {
     e.preventDefault();
    try{
-    const res = await login({email, password}).unwrap();
-    dispatch(setCredentials({...res}));
-    navigate('/');
+   const res = await login({email, password}).unwrap();
+   dispatch(setCredentials({...res}));
+   navigate('/');
    }catch(err){
     toast.error(err?.data?.message || err.error);
    }
@@ -40,7 +40,24 @@ const Login = () => {
     return(
         <div className="container">
           <div className="row">
-            <div className="col-6">todo</div>
+            <div className="col-6 left">
+         <h1 className="mb-5">Authentication Process</h1>
+         <b>User Input: </b>The user enters their credentials and submits the login form.
+         <br/>
+         <b>Server Validation: </b>The server validates the provided credentials against the database.
+         <br/>
+         <b>Token Generation: </b>Upon successful validation, the server generates a JWT.
+         <br/>
+         <b>Storing Token: </b>The JWT is stored in an HTTP-Only cookie.
+         <br/>
+         <b>Client Update: </b>The client-side state is updated using Redux Toolkit to reflect the authentication status.
+         <br/>
+         <b>Session Management: </b>The server verifies the JWT from the HTTP-Only cookie for each subsequent authenticated request.
+         <br/>
+         <b>Logout: </b>To logout, the server invalidates the JWT and removes the HTTP-Only cookie.
+         <br/>
+         By incorporating these steps, you add a robust and secure authentication mechanism to your portfolio project.
+            </div>
             <div className="col-6">
 
     <div>
@@ -67,7 +84,14 @@ const Login = () => {
           ></Form.Control>
         </Form.Group>
 
-        {isLoading && <Loader/>}
+        {isLoading && 
+        <>
+        <Loader/>
+        <p className="mt-3 text-center">
+        This website is hosted on the render free instance type ❤️, so 'Time to First Byte' may take a moment. Your patience is appreciated.
+        </p>
+        </>
+        }
 
         <Button type='submit' variant='primary' className='mt-3'>
           Sign In

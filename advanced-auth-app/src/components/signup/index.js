@@ -46,7 +46,7 @@ const Register = () => {
   };
 
     return(
-        <div className="container">
+        <div className="container container1">
        
 
     <div className="registerForm">
@@ -93,7 +93,14 @@ const Register = () => {
           ></Form.Control>
         </Form.Group>
 
-        {isLoading && <Loader />}
+        {isLoading && 
+        <>
+        <Loader/>
+        <p className="mt-3 text-center">
+        This website is hosted on the render free instance type ❤️, so 'Time to First Byte' may take a moment. Your patience is appreciated.
+        </p>
+        </>
+        }
 
         <Button type='submit' variant='primary' className='mt-3'>
          Register
